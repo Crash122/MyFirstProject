@@ -34,76 +34,81 @@ namespace ConsoleApp20
 
         static private string Combination(int[] a)
         {
-            string[] comb = new string[5];
+            bool[] comb1 = new bool[7];
+            comb1[0] = Poker(a);
+            comb1[1] = Kare(a);
+            comb1[2] = FullHouse(a);
+            comb1[3] = Triple(a);
+            comb1[4] = TwoDouble(a);
+            comb1[5] = Double(a);
+            comb1[6] = true;
+            string[] comb = new string[7];
             string strongest = "Наивысшее очко";
-            int y = 0;
+            comb[0] = "Покер";
+            comb[1] = "Каре";
+            comb[2] = "Фулл Хаус";
+            comb[3] = "Тройка";
+            comb[4] = "Две пары";
+            comb[5] = "Пара";
+            comb[6] = "Наивысшее очко";
             for (int i = 0; i < a.Length; i++)
             {
-                for (int s = 0; s < a.Length; s++)
-                { 
-                    if (s != i)
-                    {
-                        y = 0;
-                       
-                        
-                       
-                        if (a[i] == a[s] && comb[i] == "Каре" && y != 1)
-                        {
-                            comb[i] = "Покер";
-                            strongest = "Покер";
-                            y = 1;
-                            break;
-                        }
-                        else if (a[i] == a[s] && comb[i] == "Тройка" && y != 1)
-                        {
-                            comb[i] = "Каре";
-                            strongest = "Каре";
-                            y = 1;
-                        }
-
-                       else if (a[i] == a[s] && comb[i] == "Пара" && y != 1)
-                        {
-                            comb[i] = "Тройка";
-                            strongest = "Тройка";
-                            y = 1;
-                        }
-                       
-                       else if (a[i] == a[s])
-                        {
-                            comb[i] = "Пара";
-                            strongest = "Пара";
-                            y = 1;
-                        }
-                    }
-
-
-                }
-                if (comb[i] == "Покер")
-                { break;  }
-            }
-            int pair = 0;
-            int house = 0;
-            if (strongest != "Покер" || strongest != "Каре")
-            {
-                for (int i = 0; i < comb.Length; i++)
+                if (comb1[i] == true)
                 {
-                    if (comb[i] == "Пара")
-                    {
-                        pair = pair + 1;
-                        house = house + 1;
-                    }
-                    if (comb[i] == "Тройка")
-                    {
-                        house = house + 1;
-
-                    }
-                    if (house == 5)
-                    { strongest = "Фулл Хаус"; }
-                    else if (pair == 4 && strongest != "Тройка")
-                    { strongest = "Две пары"; }
+                    strongest = comb[i];
+                    break;
                 }
             }
+            
             return strongest;
         }
+      static private bool Poker (int[] a)
+        {
+            int y = 0;
+            for (int s = 1; s < a.Length; s++)
+            {
+                int i = 0;
+                if (a[i] == a[s])
+                {
+                    y = y + 1;
+                }
+            }
+            if (y == 4)
+            {
+                return true;
+            }
+            return false;
+        }
+        static private bool Kare(int[] a)
+        {
+           
+
+            return false;
+        }
+        static private bool FullHouse(int[] a)
+        {
+            
+            
+            if (Double(a) == true && Triple(a) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+       static private bool Triple(int[] a)
+        {
+           
+            return false;
+        }
+           static private bool TwoDouble(int[] a)
+            {
+            
+            return false;
+            }
+            static private bool Double(int[] a)
+            {
+            
+            return false;
+            }
     }
 }
